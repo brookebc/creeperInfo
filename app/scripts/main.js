@@ -26,31 +26,29 @@ seeYoStuff: function(){
 	
 	$.ajax({
 			type:"GET",
-			url: "http://api.pipl.com/search/v3/json/?email=brooke.casey%40gmail.com&phone=8437258318&first_name=Brooke&last_name=Casey&middle_name=Brittany&raw_name=brooke+casey&country=US&state=SC&from_age=25&to_age=30&callback=JSONP&exact_name=0&query_params_mode=and&key=dmw46xb6qfrfr9ncz25rkgth",
+			url: "http://api.pipl.com/search/v3/json/?email=brooke.casey%40gmail.com&phone=8437258318&first_name=Brooke&last_name=Casey&middle_name=Brittany&raw_name=brooke+casey&country=US&state=SC&from_age=25&to_age=30&callback=JSONP&exact_name=0&query_params_mode=and&key=d24xragg5n8recdnvvdffatc",
 			dataType: "jsonp",
-			// beforeSend: function(xhr) {
-			// xhr.setRequestHeader("X-Mashape-Authorization", "dmw46xb6qfrfr9ncz25rkgth");
+			data: $('myForm').serialize(),	// {email: $("#emailholder").val()}
+
 			error: function(jqXHR, status, error){
 				alert("no! something is wrong" + error);
 			},
 			success: function (data, datatype, jqXHR){
 				console.log("success!");
-				// alert(JSON.stringify(data));
 
-				// var person = data;
-				// console.log(data);
-				
-				// var html = '';
+				var records = data.records;
+				console.log(records);
+				var html = '';
 
-				// for (var i = 0; i <person.length; i++){
-					
-				// html += '<li>' + person.relationships[i].name.display + '</li>';
-				// }; 
+				for (var i = 0; i <records.length; i++){
 
-				// alert("oh man its about to happen");
-				// $("#righthere").html(html);
+				html += '<li>' + records[i].source.domain + '</li>\n';
+				};
+				$(".righthere").append(html);	
 			}
-		});
+
+	});
+
 }
 
 }
