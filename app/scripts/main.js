@@ -23,8 +23,8 @@ initEvents: function(){
 	
 },
 
-makeSearchUri: function(e){
-	e.preventDefault;
+makeSearchUri: function(event){
+	event.preventDefault();
 
 	var first = $('.first').val();
 	console.log(first);
@@ -34,6 +34,9 @@ makeSearchUri: function(e){
 
 	var last = $('.last').val();
 	console.log(last);
+
+	var rawname = 'first' + 'last'
+	console.log(rawname);
 
 	var email = $('.email').val();
 	var readyemail =  encodeURIComponent(email);
@@ -51,10 +54,14 @@ makeSearchUri: function(e){
 	var country = $('.country').val();
 	console.log(country);
 
-	var key = "d24xragg5n8recdnvvdffatc";
+	var key = "dmw46xb6qfrfr9ncz25rkgth";
 
-var readyurl = "http://api.pipl.com/search/v3/json/?" + "&email_name=" + readyemail + "&phone=" + phone + "&first_name=" + first + "&last_name=" + last + "&middle_name=" + middle + "&country=" + country + " &state=" + state + "&callback=JSONP&exact_name=0&query_params_mode=and&key=" + key;
+var readyurl = "http://api.pipl.com/search/v3/json/?" + "&email_name=" + readyemail + "&phone=" + phone + "&first_name=" + first + "&last_name=" + last + "&middle_name=" + middle + "&country=" + country + "&state=" + state + "&callback=JSONP&query_params_mode=and&key=" + key;
+console.log(readyurl);
 alert(readyurl);
+getinfo(readyurl);
+
+function getinfo(){
 
 	$.ajax({
 			type:"GET",
@@ -62,6 +69,7 @@ alert(readyurl);
 			dataType: "jsonp",
 			error: function(jqXHR, status, error){
 				alert("no! something is wrong" + error);
+				console.log(error);
 			},
 			success: function (data, datatype, jqXHR){
 				console.log("success!");
@@ -71,18 +79,21 @@ alert(readyurl);
 
 				var html = '';
 
-				for (var i = 0; i < peopleinfo.addresses.length; i++){
+				for (var i = 0; i <peopleinfo.addresses.length; i++){
 
-				html += '<li>' + peopleinfo.addresses[i].display + '</li>\n';
+				html += '<li>' + peopleinfo.addresses[i].display + '</li>';
 				};
 				console.log(html);
+
 				$(".righthere").html(html);	
 			}
 		});
+
+	}
 },
 
-seeSources: function(e){
-	e.preventDefault();
+seeSources: function(event){
+	event.preventDefault();
 
 	console.log("so you wanna see my sources");
 	$(".sources").append("Just a sec. Let me get it organized for you");
