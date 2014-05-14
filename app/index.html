@@ -18,56 +18,101 @@
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="../bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
-
     </head>
     <body>
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-
         <div class="container">
             <div class="header">
                 <ul class="nav nav-pills pull-right">
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
                 </ul>
                 <h3 class="text-muted">creeperInfo</h3>
             </div>
-
-            <div class="jumbotron">
-                <h1>'Allo, 'Allo!</h1>
-                <p class="lead">Always a pleasure scaffolding your apps.</p>
-                <p><a class="btn btn-lg btn-success" href="#">Splendid! <span class="glyphicon glyphicon-ok"></span></a></p>
+                <h1>This is Kinda Creepy!</h1>
+                <p><a class="btn btn-lg btn-success letsgo" href="#">Splendid!</a></p>
+            <div class="formstart col-lg-5 searchtime"> <!--form starts here -->
+                <h3>Your specs please <span class="label label-default">Step 1</span></h3>
+                <form class="form-horizontal userdataform" role="form">
+                    <div class="form-group">
+                        <label for="inputFirst3" class="col-sm-2 control-label">First Name</label>
+                        <div class="col-sm-5">
+                          <input type="first" class="form-control first" name="params[first_name]" id="inputFirst3" placeholder="First Name">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputMiddle3" class="col-sm-2 control-label">Middle Name</label>
+                        <div class="col-sm-5">
+                          <input type="middle" class="form-control middle" name="params[middle_name]" id="inputMiddle3" placeholder="Middle Name">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputLast3" class="col-sm-2 control-label">Last Name</label>
+                        <div class="col-sm-5">
+                          <input type="last" class="form-control last" name="params[last_name]" id="inputLast3" placeholder="Last Name">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-5">
+                          <input type="email" class="form-control email" name="params[email]" id="inputEmail3" placeholder="Email">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputPhone3" class="col-sm-2 control-label">Phone</label>
+                        <div class="col-sm-5">
+                          <input type="phone" class="form-control phone" name="params[phone]" id="inputPhone3" placeholder="Phone">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputCity3" class="col-sm-2 control-label">City</label>
+                        <div class="col-sm-5">
+                          <input type="city" class="form-control city" name="params[city]" id="inputCity3" placeholder="City">
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label for="inputState3" class="col-sm-2 control-label">State</label>
+                        <div class="col-sm-5">
+                          <input type="state" class="form-control state" name="params[state]" id="inputState3" placeholder="State">
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label for="inputCountry3" class="col-sm-2 control-label">Country</label>
+                        <div class="col-sm-5">
+                          <input type="country" class="form-control country" name="params[country]" id="inputCountry3" placeholder="Country">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-warning btn-lg searchy">Let's Go</button>
+                        </div>
+                      </div>
+                </form>
+            </div> <!--form ends here -->
+<div class="linkbuiler">
+    <p>Here is your custom link:</p>
+    <p class="linkstarter"></p>
+</div>
+            <div class="col-lg-3 sources">
+                <h4>Believe Me</h4>
+                    <button type="submit" class="btn btn-warning btn-lg searchy">See my sources</button>
+                    <ul class="sourceshere">
+                    </ul>
             </div>
-            <div class="searchspot">
-                <button value="submit" class="searchy">Go for it</button>
+     
+            <div class="col-lg-3 results">
+                <h4>Results</h4>
+                    <ul class="righthere">
+                    </ul>
             </div>
-            <div class="row marketing">
-                <div class="col-lg-6">
-                    <h4>HTML5 Boilerplate</h4>
-                    <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
-
-                    <h4>Sass</h4>
-                    <p>Sass is a mature, stable, and powerful professional grade CSS extension language.</p>
-                    <div class="results">
-                        <ul class="righthere" id="righthere">
-                        </ul>
-                    </div>
-
-
-                    <h4>Bootstrap</h4>
-                    <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
-
-                    <h4>Modernizr</h4>
-                    <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
-
-                </div>
-            </div>
+            
+       
+           
 
             <div class="footer">
-                <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+                <p><span class="glyphicon glyphicon-heart"></span> By Brooke Casey</p>
             </div>
 
         </div>

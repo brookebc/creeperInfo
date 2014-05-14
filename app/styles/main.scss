@@ -11,6 +11,10 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
     padding: 0.2em 0;
 }
 
+.container {
+    min-width: 1000px;
+}
+
 /* Space out content a bit */
 body {
     padding-top: 20px;
@@ -90,4 +94,8 @@ body {
     .jumbotron {
         border-bottom: 0;
     }
+}
+
+.results {
+    min-height: 100px;
 }
