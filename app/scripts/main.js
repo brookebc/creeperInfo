@@ -4,7 +4,6 @@ $(document).ready(function() {
 	creeper.init();
 });
 
-
 var creeper = {
 
 init: function() {
@@ -19,7 +18,8 @@ initStyling: function() {
 initEvents: function(){
 	$(".userdataform").on("submit", this.makeSearchUri);
 	// $(".userdataform").on("submit", this.seeYoStuff);
-	$(".sources").on("click", this.seeSources);
+	// $(".sources").on("click", this.seeSources);
+	// $(".peepsplease").on("click", this.seeFam);
 	
 },
 
@@ -34,9 +34,6 @@ makeSearchUri: function(event){
 
 	var last = $('.last').val();
 	console.log(last);
-
-	var rawname = 'first' + 'last'
-	console.log(rawname);
 
 	var email = $('.email').val();
 	var readyemail =  encodeURIComponent(email);
@@ -56,10 +53,39 @@ makeSearchUri: function(event){
 
 	var key = "dmw46xb6qfrfr9ncz25rkgth";
 
-var readyurl = "http://api.pipl.com/search/v3/json/?" + "&email_name=" + readyemail + "&phone=" + phone + "&first_name=" + first + "&last_name=" + last + "&middle_name=" + middle + "&country=" + country + "&state=" + state + "&callback=JSONP&query_params_mode=and&key=" + key;
-console.log(readyurl);
-alert(readyurl);
-getinfo(readyurl);
+	var readyurl = "http://api.pipl.com/search/v3/json/?" + "&email_name=" + readyemail + "&phone=" + phone + "&first_name=" + first + "&last_name=" + last + "&middle_name=" + middle + "&country=" + country + "&state=" + state + "&callback=JSONP&query_params_mode=and&key=" + key;
+	console.log(readyurl);
+	alert(readyurl);
+	// $(".customlink").append(readyurl);
+	$("input[name='readyurl']").val(readyurl);
+	// console.log(customlink);
+	saveThis(readyurl);
+
+	function saveThis() {
+
+	var searched = {
+		name: first,
+		last: last,
+		link: readyurl,
+	};
+
+    	$.ajax({
+			type:"POST",
+			url: "http://tiy-fee-rest.herokuapp.com/collections/brookes-searches/",
+			data: searched,
+			datatype: "JSON",
+			error: function(jqXHR, status, error){
+				console.log("no! there is an error.");
+		},
+			success: function (data, datatype, jqXHR){
+				console.log("its gonna put it up there");
+
+				console.log(searched);
+				getinfo(readyurl);	
+		}
+
+	});
+};
 
 function getinfo(){
 
@@ -74,33 +100,35 @@ function getinfo(){
 			success: function (data, datatype, jqXHR){
 				console.log("success!");
 
-				var peopleinfo = data.person;
+				console.log(data);
+
+				peopleinfo = data.person;
 				console.log(peopleinfo);
 
 				var html = '';
 
-				for (var i = 0; i <peopleinfo.addresses.length; i++){
+				for (var i = 0; i < peopleinfo.addresses.length; i++){
 
-				html += '<li>' + peopleinfo.addresses[i].display + '</li>';
+					html += '<li>' + peopleinfo.addresses[i].display + '</li>';
 				};
+
 				console.log(html);
 
-				$(".righthere").html(html);	
+				$(".righthere").html(html);
+				seeSources(readyurl);
 			}
 		});
 
-	}
-},
+	};
 
-seeSources: function(event){
-	event.preventDefault();
-
+function seeSources(){
+	
 	console.log("so you wanna see my sources");
 	$(".sources").append("Just a sec. Let me get it organized for you");
 
 	$.ajax({
 				type:"GET",
-				url: "http://api.pipl.com/search/v3/json/?email=brooke.casey%40gmail.com&phone=8437258318&first_name=Brooke&last_name=Casey&middle_name=Brittany&raw_name=brooke+casey&country=US&state=SC&from_age=25&to_age=30&callback=JSONP&exact_name=0&query_params_mode=and&key=d24xragg5n8recdnvvdffatc",
+				url: readyurl,
 				dataType: "jsonp",
 				error: function(jqXHR, status, error){
 					alert("no! something is wrong" + error);
@@ -120,39 +148,49 @@ seeSources: function(event){
 
 	 				console.log(html);
 	 				$(".sourceshere").html(html);	
+	 				seeFam(readyurl);
+
 	 			}
 			});
+
+		};
+
+function seeFam(){
+
+	// var readyurl = $(".customlink").val;
+
+	console.log("I know your family too");
+	// $(".peepsplease").append("I know who your peeps are");
+
+	$.ajax({
+				type:"GET",
+				url: readyurl,
+				dataType: "jsonp",
+				error: function(jqXHR, status, error){
+					alert("no! something is wrong" + error);
+				},
+				success: function (data, datatype, jqXHR){
+					console.log("success!");
+
+					var peopleinfo = data.person;
+					console.log(peopleinfo);
+
+					var html = '';
+
+					for (var i = 0; i <peopleinfo.relationships.length; i++){
+
+					html += '<li>' + peopleinfo.relationships[i].name.display + '</li>';
+				};
+					console.log(html);
+					$(".yourpeeps").html(html);		 				
+	
+	 			}
+			});
+
+		};
 
 	}
 
 }
-
-// mapYoSelf: function(){
-// 	console.log("i heard you click the go for it button");
-	
-// 	$.ajax({
-// 			type:"GET",
-// 			url: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBozij7O9-LBYqRlEPS5IKUUY9jXvOiKIk&sensor=false",
-// 			dataType: "jsonp",
-// 			error: function(jqXHR, status, error){
-// 				alert("no! something is wrong" + error);
-// 			},
-// 			success: function (data, datatype, jqXHR){
-// 				console.log("success!");
-
-// 				var records = data.records;
-// 				console.log(records);
-// 				var html = '';
-
-// 				for (var i = 0; i <records.length; i++){
-
-// 				html += '<li>' + records[i].source.domain + '</li>\n';
-// 				};
-// 				$(".righthere").append(html);	
-// 			}
-
-// 	});
-
-// }
 
 

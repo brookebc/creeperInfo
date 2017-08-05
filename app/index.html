@@ -90,29 +90,96 @@
                       </div>
                 </form>
             </div> <!--form ends here -->
-<div class="linkbuiler">
-    <p>Here is your custom link:</p>
-   
-</div>
+            <div class="linkbuilder">
+                <p>Here is your custom link:</p>
+                  <input class="customlink" name="readyurl"></input>
+            </div>
             <div class="col-lg-3 sources">
-                <h4>Believe Me</h4>
-                    <button type="submit" class="btn btn-warning btn-lg searchy">See my sources</button>
+                <h4>Believe Me: These are the places I am checking</h4>
                     <ul class="sourceshere">
                     </ul>
             </div>
      
             <div class="col-lg-3 results">
-                <h4>Results</h4>
+                <h4>Addresses you have lived</h4>
                     <ul class="righthere">
                     </ul>
             </div>
-            
-       
-           
+            <div>
+                <h4>Your peeps</h4>
+                    <ul class="yourpeeps">
+                    </ul>
+            </div>
+            <section id="wrapper">
+       <script type="text/javascript">var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = "http://engine.carbonads.com/z/14060/azcarbon_2_1_0_VERT"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+        <header>
+          <h2>And tracking your geolocation</h2>
+        </header>
+            <meta name="viewport" content="width=620" />
 
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBozij7O9-LBYqRlEPS5IKUUY9jXvOiKIk&sensor=false"></script>
+
+        <script>
+
+
+        
+function success(position) {
+  var s = document.querySelector('#status');
+  
+  if (s.className == 'success') {
+    // not sure why we're hitting this twice in FF, I think it's to do with a cached result coming back    
+    return;
+  }
+  
+  s.innerHTML = "found you!";
+  s.className = 'success';
+  
+  var mapcanvas = document.createElement('div');
+  mapcanvas.id = 'mapcanvas';
+  mapcanvas.style.height = '400px';
+  mapcanvas.style.width = '560px';
+    
+  document.querySelector('article').appendChild(mapcanvas);
+  
+  var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  var myOptions = {
+    zoom: 15,
+    center: latlng,
+    mapTypeControl: false,
+    navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+  
+  var marker = new google.maps.Marker({
+      position: latlng, 
+      map: map, 
+      title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
+  });
+}
+
+function error(msg) {
+  var s = document.querySelector('#status');
+  s.innerHTML = typeof msg == 'string' ? msg : "failed";
+  s.className = 'fail';
+  
+  // console.log(arguments);
+}
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(success, error);
+} else {
+  error('not supported');
+}
+
+</script>
+    
+</section>
+            
             <div class="footer">
                 <p><span class="glyphicon glyphicon-heart"></span> By Brooke Casey</p>
             </div>
+            
 
         </div>
 
@@ -150,6 +217,7 @@
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/main.js"></script>
+       
         <!-- endbuild -->
 </body>
 </html>
